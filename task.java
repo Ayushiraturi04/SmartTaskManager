@@ -1,44 +1,94 @@
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
-public package task_manager;
+import java.io.*;
+import java.util.ArrayList;
 
-class task extends Frame{
-    private Label labelcount;
-    private Button btncount;
-    private TextField tfcount;
-    private int count=0;
-
+public class task extends JFrame{
     task()
     {
-        setLayout(new FlowLayout());
-
-        labelcount=new Label("Counter");
-        add(labelcount);
-        tfcount=new TextField(count+" ",10);
-        tfcount.setEditable(false);
-        add(tfcount);
-        btncount=new Button("Count");
-        add(btncount);
-        btncount.addActionListener(new btncountListener());
-
-        setTitle("counter");
+        setTitle("TASK MANAGER");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300,300);
-        setVisible(true);
+
+        JLabel usernameLabel = new JLabel("ENTER USERNAME");
+        JLabel passwordLabel = new JLabel("ENTER PASSWORD");
+
+        JTextField usernameField= new JTextField(10);
+        JPasswordField passwordField=new JPasswordField(10);
+
+        JButton Login_Button=new JButton("LOGIN");
+        Login_Button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                String username=usernameField.getText();
+                String password=new String(passwordField.getPassword());
+
+                if(login(username,password))
+                {
+                    openTaskManeger(username);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(task.this,"Invalid user name or password. Please try again.");
+
+                }
+            }
+        });
+
+        JPanel loginPanel=new JPanel();
+        loginPanel.setLayout(new GridLayout(4,2));
+        loginPanel.add(usernameLabel);
+        loginPanel.add(usernameField);
+        loginPanel.add(passwordLabel);
+        loginPanel.add(passwordField);
+        loginPanel.add(new JLabel());
+        loginPanel.add(Login_Button);
+        loginPanel.add(new JLabel());
+
+        setLayout(new BorderLayout());
+        add(loginPanel,BorderLayout.CENTER);
     }
-    public static void Main(String args[])
+    private boolean login(String username,String password)
     {
-        task ts=new task();
+        return (username.equals("admin") && password.equals("admin"));
     }
-    private Class btnCountListner implements ActionListener
+    private void openTaskManeger(String username)
     {
-        public void actionPerformed(ActionEvent e)
+        TaskManagerFrame Tasks=new TaskManagerFrame(username);
+        task.setVisible(true);
+        dispose();
+    }
+    private class TaskManagerFrame extends JFrame{
+        //private ArrayList<Task>tasks;
+        private JTable taskTable;
+        private DefaultTableModel tableModel;
+        private String username;
+        
+        TaskManagerFrame(String username)
         {
-            ++count;
-            tfcount.setText(count+"");
+            this.username=username;
+    
+            setTitle("TASK MANAGER");
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setSize(500,400);
+    
+            //tasks=new ArrayList<>();
+    
+            
         }
+    };
+    public static void main(String[] args) {
+        java.awt.EventQueue.invokeLater(new Runnable() 
+        {
+            public void run() 
+            {
+                new task();
+            }
+        });
     }
-    
-    
-    
+        
 }
+
