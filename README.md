@@ -33,11 +33,11 @@
 
 <h4>3. Compile the Java Code</h4>
 <p>Ensure you have <code>javac</code> (Java compiler) available. Run:</p>
-<pre><code>javac task.java</code></pre>
+<pre><code>javac TaskManager.java</code></pre>
 
 <h4>4. Run the Application</h4>
 <p>Once the code is compiled, you can run the application:</p>
-<pre><code>java task</code></pre>
+<pre><code>java TaskManager</code></pre>
 
 <h4>5. Login</h4>
 <p>Use the following default credentials to log in:</p>
@@ -55,13 +55,8 @@
 </ul>
 <p>All tasks are stored locally in a text file named after the username.</p>
 
-<h3>Screenshots</h3>
-<p>Include some screenshots to showcase the UI (once available).</p>
-
 <h2>Contributing</h2>
 <p>Feel free to contribute by opening a pull request or raising issues.</p>
-
-<h2>License</h2>
-<p>This project is licensed under the MIT License.</p>
+]
 
 </body>
